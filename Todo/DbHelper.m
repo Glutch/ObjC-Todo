@@ -37,7 +37,6 @@
 }
 
 - (void)addItem:(NSString*)text {
-    NSLog(@"%@", self.normalItems);
     [self.normalItems addObject:@{@"text": text}];
     [self saveDb];
 }
@@ -82,11 +81,10 @@
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
-
-- (NSInteger)getCount:(NSInteger)db {
-    if (db == 0) {
+- (NSInteger)getCount:(NSInteger)index {
+    if (index == 0) {
         return [self.priorityItems count];
-    } else if (db == 1) {
+    } else if (index == 1) {
         return [self.normalItems count];
     } else {
         return [self.completedItems count];

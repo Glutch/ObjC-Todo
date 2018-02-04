@@ -24,7 +24,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     self.dbhelper = [[DbHelper alloc] init];
     
     self.normalItems = [self.dbhelper normalItems];
@@ -55,11 +54,8 @@
 
 - (IBAction)todoAdd:(id)sender {
     NSString *text = [NSString stringWithFormat:@"%@", self.todoInput.text];
-    
     [self.dbhelper addItem:text];
-    
     self.todoInput.text = @"";
-    
     [self reload];
 }
 
@@ -95,7 +91,6 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
     static NSString * reuseIdentifier = @"todo";
     
     MGSwipeTableCell * cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
@@ -110,8 +105,6 @@
     } else {
         cell.textLabel.text = [self.completedItems objectAtIndex:indexPath.row][@"text"];
     }
-    
-    
     
     if (indexPath.section == 0) {
         cell.leftButtons = @[[MGSwipeButton buttonWithTitle:@"Undo" backgroundColor:[UIColor colorWithRed:119.0/255.0f green:181.0/255.0f blue:239.0/255.0f alpha:1.0] padding:30 callback:^BOOL(MGSwipeTableCell *sender) {
@@ -155,20 +148,6 @@
      
     return cell;
 }
-
-- (void)makePriority:(NSInteger)index {
-    [self.priorityItems addObject:[self.normalItems objectAtIndex:index]];
-    [self.normalItems removeObjectAtIndex:index];
-    [self saveDb];
-    [self reload];
-}
-
-- (void)saveDb {
-    [[NSUserDefaults standardUserDefaults] setObject:self.priorityItems forKey:@"priorityItems"];
-    [[NSUserDefaults standardUserDefaults] setObject:self.normalItems forKey:@"normalItems"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-}
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

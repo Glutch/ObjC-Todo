@@ -12,7 +12,7 @@
 @property (nonatomic) NSMutableArray *normalItems;
 @property (nonatomic) NSMutableArray *priorityItems;
 @property (nonatomic) NSMutableArray *completedItems;
-- (NSInteger)getCount:(NSInteger)db;
+- (NSInteger)getCount:(NSInteger)index;
 - (void)addItem:(NSString*)text;
 - (void)prioritize:(NSInteger)index;
 - (void)complete:(NSInteger)section row:(NSInteger)row;
